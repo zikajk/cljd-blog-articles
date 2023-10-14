@@ -1,0 +1,36 @@
+*The core of this project is to:*
+1. Develop a simple webpage that displays ORG files using Flutter.
+2. Learn CLJD & Flutter
+
+*Tech:*
+1. ClojureDart & Flutter
+   - ~org_flutter: 4.2.0~ for parsing ORG files.
+2. Github for hosting articles
+   - contributions and ideas are welcome!
+3. [[https://www.jsdelivr.com/][jsdelivr]] for delivering resources via Github / CDN
+
+* Lessons Learned
+  1. *Utilizing ~watch~ in File Loading*
+     Instead of opting for various helpers like ~FutureBuilder~, ~StreamBuilder~, or ~AnimatedBuilder~ when loading external files as strings, we can use ~:watch~ within ~f/widget.~
+  2. *Stateful Widget Rerendering*
+     Stateful Widgets don't automatically rerender, use ~:key~.
+     [[https://www.youtube.com/watch?v=kn0EOS-ZiIc][Video explaining the concept ]]
+
+  3. *Addressing Non-Selectable Text in Widgets*
+     Many Widgets has not selectable text by default.
+     Wrap them in ~m/SelectionArea~!
+
+See Code demonstrating points above:
+#+begin_src clojure
+  (f/widget
+   :watch [text (services/rootBundle.loadString "resources/org/example.org")]
+   :key (foundation/UniqueKey)
+   (m/SelectionArea
+    (org/Org text)))
+#+end_src
+
+* Work to be done
++ *Explore Slack:* Navigate through the official Slack channel for valuable insights.
++ *Organize Info:* Extract and structure the information for enhanced accessibility.
++ *Concept Articles:* Craft articles on beneficial concepts, enhancing both community knowledge and personal learning.
++ *Interactive Projects:* Develop interactive projects using CLJD and maintain a developer’s journal here.
